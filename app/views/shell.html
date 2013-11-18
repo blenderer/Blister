@@ -10,9 +10,18 @@
                     <a data-bind="attr: { href: hash }, html: title"></a>
                 </li>
             </ul>
-            <div class="loader pull-right" data-bind="css: { active: router.isNavigating }">
-                <i class="icon-spinner icon-2x icon-spin"></i>
-            </div>
+
+            <form class="navbar-form pull-right control-group" data-bind="submit: login, visible: !logged_in(), css: { error: login_attempts() > 0 }">
+              <input type="text" class="span2" placeholder="Username" data-bind="value: username">
+              <input type="password" class="span2" placeholder="Password" data-bind="value: password">
+              <button type="submit" class="btn">Login</button>
+            </form>
+
+            <ul class="nav pull-right" data-bind="visible: logged_in">
+                <li>
+                    <a href="#" data-bind="click: logout">Logout</a>
+                </li>
+            </ul>
         </div>
     </div>
     
