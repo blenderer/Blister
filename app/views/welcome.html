@@ -1,5 +1,5 @@
 ﻿<h2>Latest Public Lists</h2>
 
-<ul data-bind="foreach: this.rolls">
+<ul data-bind="foreach: rolls">
     <li><a data-bind="attr: {href: 'http://localhost/blister/public/list/' + id}, text: name"></a> <span data-bind="text: updated_at"></span> <em><span data-bind="text: items.length"></span> items</em></li>
 </ul>

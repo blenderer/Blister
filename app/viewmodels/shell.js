@@ -1,4 +1,4 @@
-﻿define(['plugins/router', 'durandal/app', 'knockout'], function (router, app) {
+﻿define(['plugins/router', 'durandal/app', 'knockout', 'plugins/http'], function (router, app, ko, http) {
 
     var ko = require('knockout');
 
@@ -54,6 +54,13 @@
             router.map([
                 { route: '', title:'Home', moduleId: 'viewmodels/welcome', nav: true }
             ]).buildNavigationModel();
+
+            var that = this;
+
+            http.get('http://localhost/blister/public/account').then(function(response) {
+                that.logged_in(true);
+                that.username(response.data.user.username);
+            })
             
             return router.activate();
         }
