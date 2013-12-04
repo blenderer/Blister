@@ -8,7 +8,7 @@
             var that = this;
             return { 
             	latest: http.get('http://localhost/blister/public/latest').then(function(response) {
-	                	that.rolls(response.data.latest_lists);
+                        that.rolls(response.data.latest_lists);
 	            	})
         	}
 

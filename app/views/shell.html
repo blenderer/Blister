@@ -4,16 +4,28 @@
             <a class="brand" data-bind="attr: { href: router.navigationModel()[0].hash }">
                 <span>Blister</span>
             </a>
+
             <ul class="nav" data-bind="foreach: router.navigationModel">
                 <li data-bind="css: { active: isActive }">
                     <a data-bind="attr: { href: hash }, html: title"></a>
                 </li>
             </ul>
 
+            <ul class="nav">
+                <li>
+                    <a href="#" data-bind="">My Lists</a>
+                </li>
+                <li>
+                    <a href="#" data-bind="">New List</a>
+                </li>
+            </ul>
+
+
             <form class="navbar-form pull-right control-group" data-bind="submit: login, visible: !logged_in(), css: { error: login_attempts() > 0 }">
               <input type="text" class="span2" placeholder="Username" data-bind="value: username">
               <input type="password" class="span2" placeholder="Password" data-bind="value: password">
               <button type="submit" class="btn">Login</button>
+              <button type="button" class="btn btn-primary">Signup</button>
             </form>
 
             <ul class="nav pull-right" data-bind="visible: logged_in">

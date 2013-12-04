@@ -1,6 +1,6 @@
 ﻿define(['plugins/router', 'durandal/app', 'knockout', 'plugins/http'], function (router, app, ko, http) {
 
-    var ko = require('knockout');
+
 
 
 
@@ -51,16 +51,17 @@
             });
         },
         activate: function () {
-            router.map([
-                { route: '', title:'Home', moduleId: 'viewmodels/welcome', nav: true }
-            ]).buildNavigationModel();
-
-            var that = this;
+        	var that = this;
 
             http.get('http://localhost/blister/public/account').then(function(response) {
-                that.logged_in(true);
-                that.username(response.data.user.username);
-            })
+                	that.logged_in(true);
+                	that.username(response.data.user.username);
+            	})
+
+            router.map([
+                { route: '', title:'Home', moduleId: 'viewmodels/welcome', nav: true },
+                { route: 'list(/:id)', title: 'List', moduleId: 'viewmodels/list', hash: '#list' }
+            ]).buildNavigationModel();
             
             return router.activate();
         }
