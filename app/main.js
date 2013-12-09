@@ -12,7 +12,9 @@
         'bootstrap': {
             deps: ['jquery'],
             exports: 'jQuery'
-       }
+        },
+        'jquery-ui' : ['jquery'],
+        'knockout-sortable' : ['jquery-ui']
     }
 });
 
