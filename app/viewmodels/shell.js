@@ -1,4 +1,4 @@
-﻿define(['plugins/router', 'durandal/app', 'knockout', 'plugins/http'], function (router, app, ko, http) {
+﻿define(['plugins/router', 'durandal/app', 'knockout', 'plugins/http','global'], function (router, app, ko, http, global) {
 
 
 
@@ -7,9 +7,9 @@
     return {
         router: router,
         login_attempts: ko.observable(0),
-        logged_in: ko.observable(false),
         username: ko.observable(""),
         password: ko.observable(""),
+        logged_in: ko.observable(false),
         login: function() {
             var that = this;
             request = $.ajax({ 
@@ -26,8 +26,8 @@
                     },
                     200: function() {
                         app.showMessage("You are now logged in.");
-                        that.logged_in(true);
-                        
+                        global.logged_in(true);
+                        global.username(that.username);
                     }
                 }
             });
@@ -44,7 +44,8 @@
                         app.showMessage("You have now logged out.");
                         that.username("");
                         that.password("");
-                        that.logged_in(false);
+                        global.username("");
+                        global.logged_in(false);
                         that.login_attempts(0);
                     }
                 }
@@ -54,8 +55,10 @@
         	var that = this;
 
             http.get('http://localhost/blister/public/account').then(function(response) {
-                	that.logged_in(true);
-                	that.username(response.data.user.username);
+                	global.logged_in(true);
+                	global.username(response.data.user.username);
+                    that.logged_in(true);
+                    that.username(response.data.user.username)
             	})
 
             router.map([

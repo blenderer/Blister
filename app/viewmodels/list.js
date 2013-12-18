@@ -1,11 +1,18 @@
-define(['plugins/http', 'durandal/app', 'knockout', 'plugins/jquery-ui', 'plugins/knockout-sortable'], function (http, app, ko) {
+define(['plugins/http', 'durandal/app', 'knockout', 'global', 'plugins/jquery-ui', 'plugins/knockout-sortable'], function (http, app, ko, global) {
 
 
     return {
         name : ko.observable(""),
         items: ko.observableArray([]),
+        listuser: ko.observable(""),
+
+        logged_in: ko.observable(false),
+        username: ko.observable(""),
 
         activate: function (id) {
+            this.logged_in(global.logged_in());
+            this.username(global.username());
+
         	var that = this;
             return http.get('http://localhost/blister/public/list/' + id).then(function(response) {
                 
@@ -14,6 +21,8 @@ define(['plugins/http', 'durandal/app', 'knockout', 'plugins/jquery-ui', 'plugin
                 
                 //grab the list's name
                 that.name(list.name);
+
+                that.listuser(list.user.username);
 
                 //clear the items list
                 that.items([]);

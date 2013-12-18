@@ -1,4 +1,4 @@
-<h1 data-bind="text: name"></h1><em data-bind="visible: logged_in">EDITABLE</em>
+<h1><span data-bind="text: name"></span> <span class="author">by <span data-bind="text: listuser"></span></span></h1>
 <ul data-bind="foreach: items">
 	<li data-bind="text: item_text"></li>
 </ul>
